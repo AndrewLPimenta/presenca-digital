@@ -15,6 +15,7 @@ function HomePage() {
   }, []);
 
   return (
+    <main>
     <div className="home-page">
       <Header />
       <div className={`banner ${isVisible ? 'show' : ''}`}>
@@ -23,15 +24,16 @@ function HomePage() {
           <p className="animate-text">Esta é a página inicial do aplicativo, onde os alunos podem marcar sua presença de forma digital!</p>
           <div className="buttons">
             <Link to="/Present">
-              <button className="btn">Acessar a Marcação de Presença</button>
+              <button className="button">Acessar a Marcação de Presença</button>
             </Link>
             <Link to="/Registration">
-              <button className="btn">Realizar Registro</button>
+              <button className="button">Realizar Registro</button>
             </Link>
           </div>
         </div>
       </div>
     </div>
+      </main>
   );
 }
 

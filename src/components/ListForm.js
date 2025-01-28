@@ -1,38 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { BrowserMultiFormatReader } from '@zxing/library'; // Importa a biblioteca para leitura do QR Code
 
 const ListForm = () => {
   const [nome, setNome] = useState('');
   const [matricula, setMatricula] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const [qrCode, setQrCode] = useState(null); // Variável para armazenar o QR code lido
-  const [isQRCodeScanned, setIsQRCodeScanned] = useState(false); // Para saber se o QR code foi lido
-  const [isAlunoVerificado, setIsAlunoVerificado] = useState(false); // Verifica se o aluno foi encontrado
+  const [qrCode, setQrCode] = useState(null);
+  const [isQRCodeScanned, setIsQRCodeScanned] = useState(false);
+  const [isAlunoVerificado, setIsAlunoVerificado] = useState(false);
+  const [alunos, setAlunos] = useState([]);  // Lista de alunos simulada ou vinda de uma API
+  const [qrCodeMessage, setQrCodeMessage] = useState('');  // Mensagem para mostrar ao clicar no botão de QR Code
 
-  // Função para verificar se o aluno está no banco de dados
-  const verificarAluno = async () => {
-    if (!matricula) return;
-
+  // Função para buscar alunos (simulação ou API real)
+  const buscarAlunos = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/api/verify-student', {
-        matricula,
-      });
-
-      if (response.data.success) {
-        setNome(response.data.nome);
-        setIsAlunoVerificado(true);
-        setErrorMessage('');
-        setSuccessMessage('Aluno verificado com sucesso!');
-      } else {
-        setErrorMessage('Aluno não encontrado.');
-        setIsAlunoVerificado(false);
-        setSuccessMessage('');
-      }
+      const response = await axios.get('http://localhost:3000/api/alunos');
+      setAlunos(response.data);
     } catch (error) {
-      setErrorMessage('Erro ao verificar aluno.');
+      console.error('Erro ao buscar alunos:', error);
+      setErrorMessage('Erro ao buscar alunos');
+    }
+  };
+
+  // Função para verificar se o aluno existe
+  const verificarAluno = () => {
+    const alunoExistente = alunos.find(aluno => aluno.matricula === matricula);
+
+    if (alunoExistente) {
+      setNome(alunoExistente.nome);  // Preenche o nome do aluno
+      setIsAlunoVerificado(true);
+      setErrorMessage('');
+      setSuccessMessage('');
+    } else {
+      setNome('');
+      setIsAlunoVerificado(false);
+      setErrorMessage('Aluno não encontrado.');
       setSuccessMessage('');
     }
   };
@@ -41,7 +45,6 @@ const ListForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Se o QR Code foi lido, a matrícula já está preenchida automaticamente
     if (!matricula && !qrCode) {
       setErrorMessage('Você precisa escanear o QR Code ou inserir a matrícula manualmente.');
       setSuccessMessage('');
@@ -65,47 +68,18 @@ const ListForm = () => {
       // Limpar os campos após o envio
       setNome('');
       setMatricula('');
-      setQrCode(null); // Limpar QR Code lido
-      setIsQRCodeScanned(false); // Resetar a flag do QR Code
+      setQrCode(null);
+      setIsQRCodeScanned(false);
     } catch (error) {
       setErrorMessage('Erro ao marcar a presença.');
       setSuccessMessage('');
     }
   };
 
-  // Função para processar a leitura do QR Code
-  const handleScan = (result) => {
-    if (result) {
-      setQrCode(result.getText());
-      setIsQRCodeScanned(true);
-      setErrorMessage('');
-      setSuccessMessage('QR Code lido com sucesso!');
-    }
-  };
-
-  const handleError = (err) => {
-    setErrorMessage('Erro ao escanear QR Code.');
-    setSuccessMessage('');
-  };
-
-  // Função para iniciar o scanner de QR Code
-  const startScanner = () => {
-    if (!isAlunoVerificado) {
-      setErrorMessage('Você precisa verificar o aluno antes de iniciar a leitura do QR Code.');
-      return;
-    }
-
-    const codeReader = new BrowserMultiFormatReader();
-    codeReader
-      .decodeFromVideoDevice(null, 'video', (result, error) => {
-        if (result) {
-          handleScan(result);
-        }
-        if (error) {
-          handleError(error);
-        }
-      })
-      .catch(handleError);
+  // Função simulada para escanear o QR Code
+  const handleQRCodeScan = () => {
+    // Exibe a mensagem de "Em breve!" quando o botão for clicado
+    setQrCodeMessage('Em breve!');
   };
 
   // Efeito para verificar aluno ao alterar matrícula
@@ -115,6 +89,11 @@ const ListForm = () => {
     }
   }, [matricula]);
 
+  // Carregar alunos ao montar o componente
+  useEffect(() => {
+    buscarAlunos();
+  }, []);
+
   return (
     <main>
       <StyledWrapper>
@@ -122,7 +101,8 @@ const ListForm = () => {
           <form className="form" onSubmit={handleSubmit}>
             <div className="welcome-message">
               <h1 className="welcome-h1">Bem-vindo.</h1>
-              <p className="welcome-p">Agora é só me dizer quem você é e sua matrícula para marcar sua presença!</p>
+              <h2 className="welcome-h1">Agora é só me dizer quem você é e sua matrícula para marcar sua presença!</h2>
+              <p className="welcome-p">Diga adeus ao papel e caneta.</p>
             </div>
 
             <span className="heading">Marcar Presença</span>
@@ -134,19 +114,18 @@ const ListForm = () => {
                 type="text"
                 value={matricula}
                 onChange={(e) => setMatricula(e.target.value)}
-                onBlur={verificarAluno} // Verifica o aluno ao sair do campo matrícula
+                onBlur={verificarAluno}  // Verifica o aluno ao sair do campo matrícula
               />
               <label>Matrícula</label>
             </div>
 
-            {/* Nome será preenchido automaticamente após verificação do aluno */}
             <div className="form-group">
               <input
                 className="form-input"
                 type="text"
                 value={nome}
                 readOnly
-                disabled // Nome só pode ser visualizado depois da verificação
+                disabled
               />
               <label>Nome</label>
             </div>
@@ -155,17 +134,22 @@ const ListForm = () => {
               <div className="success-message">Aluno verificado: {nome}</div>
             )}
 
-            {/* Se o QR Code não foi lido, mostrar a opção para escanear */}
             <div className="qr-scanner">
               <button
                 type="button"
                 className="qr-button"
-                onClick={startScanner}
-                disabled={!isAlunoVerificado} // Botão de QR Code só pode ser clicado após verificação
+                onClick={handleQRCodeScan}
+                disabled={!isAlunoVerificado}
               >
-                Iniciar Leitura de QR Code
+                Ler QR-Code
               </button>
-              <div id="video" style={{}} />
+
+              {/* Exibe a mensagem de "Em breve!" */}
+              {qrCodeMessage && (
+                <div className="qr-message">
+                  <p>{qrCodeMessage}</p>
+                </div>
+              )}
             </div>
 
             <button type="submit" disabled={!isQRCodeScanned && !matricula}>
@@ -201,6 +185,7 @@ const StyledWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    padding-top: 2rem;
   }
 
   .heading {
@@ -236,6 +221,7 @@ const StyledWrapper = styled.div`
     gap: 5px;
     color: #414141;
     position: relative;
+    padding-top: 1.2rem;
   }
 
   .form-group label {
@@ -262,9 +248,10 @@ const StyledWrapper = styled.div`
     justify-content: center;
     align-items: center;
     border: none;
+    flex-direction: column;
     border-radius: 5px;
     background-color: #212121;
-    padding: 2rem;
+    padding: 0.2rem;
     justify-content: center;
   }
 
@@ -298,6 +285,13 @@ const StyledWrapper = styled.div`
     color: #d81d1d;
     font-size: 16px;
     font-weight: 600;
+  }
+
+  .qr-message {
+    color: #ff9800;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
   }
 `;
 
