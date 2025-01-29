@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -10,13 +10,13 @@ const ListForm = () => {
   const [qrCode, setQrCode] = useState(null);
   const [isQRCodeScanned, setIsQRCodeScanned] = useState(false);
   const [isAlunoVerificado, setIsAlunoVerificado] = useState(false);
-  const [alunos, setAlunos] = useState([]);  // Lista de alunos simulada ou vinda de uma API
-  const [qrCodeMessage, setQrCodeMessage] = useState('');  // Mensagem para mostrar ao clicar no botão de QR Code
+  const [alunos, setAlunos] = useState([]);  // Lista de alunos
+  const [qrCodeMessage, setQrCodeMessage] = useState('');  // Mensagem para QR Code
 
-  // Função para buscar alunos API
+  // Função para buscar alunos da API
   const buscarAlunos = async () => {
     try {
-      const response = await axios.get('https://precenca-digital-back-end-ixgy.vercel.app/api/alunos');
+      const response = await axios.get('https://precenca-digital-back-end.onrender.com/api/alunos');
       setAlunos(response.data);
     } catch (error) {
       console.error('Erro ao buscar alunos:', error);
@@ -24,8 +24,8 @@ const ListForm = () => {
     }
   };
 
-  // Função para verificar se o aluno existe API
-  const verificarAluno = () => {
+  // Função para verificar se o aluno existe
+  const verificarAluno = useCallback(() => {
     const alunoExistente = alunos.find(aluno => aluno.matricula === matricula);
 
     if (alunoExistente) {
@@ -39,7 +39,7 @@ const ListForm = () => {
       setErrorMessage('Aluno não encontrado.');
       setSuccessMessage('');
     }
-  };
+  }, [alunos, matricula]);  // Dependências
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
@@ -52,7 +52,7 @@ const ListForm = () => {
     }
 
     try {
-      const response = await axios.post('https://precenca-digital-back-end-2998-6juewadp3.vercel.app/api/register', {
+      const response = await axios.post('https://precenca-digital-back-end.onrender.com/api/register', {
         matricula: qrCode || matricula,
         nome,
       });
@@ -78,8 +78,9 @@ const ListForm = () => {
 
   // Função simulada para escanear o QR Code
   const handleQRCodeScan = () => {
-    // Exibe a mensagem de "Em breve!" quando o botão for clicado
-    setQrCodeMessage('Em breve!');
+    // A lógica real de escanear QR Code seria aqui
+    setQrCodeMessage('Em breve!');  // Placeholder para o QR code
+    setIsQRCodeScanned(true);  // Simula que o QR Code foi escaneado
   };
 
   // Efeito para verificar aluno ao alterar matrícula
@@ -87,7 +88,7 @@ const ListForm = () => {
     if (matricula.length > 0) {
       verificarAluno();
     }
-  }, [matricula]);
+  }, [matricula, verificarAluno]);  // Dependências
 
   // Carregar alunos ao montar o componente
   useEffect(() => {
