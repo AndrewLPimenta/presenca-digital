@@ -8,11 +8,10 @@
 
 }
 
-.present-page{
+.present-page {
   background-color: #212121;
 }
 
-/* From Uiverse.io by reshades */ 
 .button {
   text-decoration: none;
   background-color: #ffffff00;
@@ -47,7 +46,7 @@
 }
 
 .home-html {
-
+  
   background-size: cover;
   background-position: center;
   display: flex;

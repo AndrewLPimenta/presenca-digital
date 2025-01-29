@@ -13,10 +13,10 @@ const ListForm = () => {
   const [alunos, setAlunos] = useState([]);  // Lista de alunos simulada ou vinda de uma API
   const [qrCodeMessage, setQrCodeMessage] = useState('');  // Mensagem para mostrar ao clicar no botão de QR Code
 
-  // Função para buscar alunos (simulação ou API real)
+  // Função para buscar alunos API
   const buscarAlunos = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/alunos');
+      const response = await axios.get('https://precenca-digital-back-end-2998.vercel.app/api/alunos');
       setAlunos(response.data);
     } catch (error) {
       console.error('Erro ao buscar alunos:', error);
@@ -24,7 +24,7 @@ const ListForm = () => {
     }
   };
 
-  // Função para verificar se o aluno existe
+  // Função para verificar se o aluno existe API
   const verificarAluno = () => {
     const alunoExistente = alunos.find(aluno => aluno.matricula === matricula);
 
@@ -52,7 +52,7 @@ const ListForm = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/mark-attendance', {
+      const response = await axios.post('https://precenca-digital-back-end-2998.vercel.app/api/register', {
         matricula: qrCode || matricula,
         nome,
       });
