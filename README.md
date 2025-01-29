@@ -1,71 +1,20 @@
-# Getting Started with Create React App
+Projeto: Presença Digital
+Tecnologias: React, Axios, React Router, Styled Components
+Objetivo: Criar uma solução moderna e descomplicada para controle de presença, utilizando QR Code e uma interface clean, tudo de forma ágil e sem dor de cabeça.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+🚀 O que é o Projeto?
+O Presença Digital é um projeto que nasceu para simplificar o controle de presença, transformando algo que costuma ser tedioso e burocrático em uma experiência fluida e tecnológica. Ele permite registrar a presença de maneira super rápida e precisa, usando QR Codes. Tudo foi feito para garantir que o processo seja o mais simples e eficiente possível, tanto para quem registra quanto para quem precisa validar a presença.
 
-## Available Scripts
+Eu usei React para garantir uma interface ágil e interativa, enquanto o React Router deixa a navegação super suave entre as páginas. E claro, o design não podia ficar para trás, então o layout foi feito com Styled Components, tornando o app elegante e super responsivo em qualquer dispositivo. 📱💻
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# presenca-digital
+🌟 Por que esse projeto é tão especial?
+Interface Intuitiva e Ágil:
+O foco principal foi criar uma plataforma simples e fácil de usar. Nada de interfaces complicadas. Aqui, a ideia é que qualquer pessoa consiga entender e usar sem esforço, seja um aluno ou um organizador de eventos.
+QR Code para Controle de Presença:
+Já que o futuro é digital, por que não trazer mais agilidade ao processo de registro? Com QR Code, a presença é validada instantaneamente, sem complicação, e sem erro humano.
+Navegação Fluida com React Router:
+Nada de telas carregando o tempo todo! A navegação entre as páginas é super rápida e sem interrupções, graças ao React Router v6. Assim, você chega de uma página à outra em um piscar de olhos.
+Comunicação Eficiente com Axios:
+Não é só o frontend que brilha — o backend também está bem estruturado. O Axios permite fazer requisições rápidas e confiáveis, mantendo a comunicação com o backend sem perder desempenho ou qualidade.
+Design Responsivo e Elegante:
+O Styled Components deixou o projeto não só funcional, mas também super bonito. O design é clean e elegante, garantindo que a experiência seja agradável, seja no celular, no tablet ou no computador.
