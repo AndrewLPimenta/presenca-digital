@@ -15,7 +15,7 @@ export default function Header() {
                 <div className="links">
                     <Link className="links-nav" to=".././Present">Presença</Link>
                     <Link className="links-nav" to=".././HomePage">Home</Link>
-                    <Link className="links-nav" to="/">Registro</Link>
+                    <Link className="links-nav" to=".././Registration">Registro</Link>
                 </div>
 
                 {/* Menu hambúrguer visível no mobile */}

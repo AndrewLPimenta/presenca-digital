@@ -9,13 +9,9 @@
     "dom": "^0.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-qr-reader": "^3.0.0-beta-1",
-    "react-qr-scanner": "^1.0.0-alpha.11",
     "react-router-dom": "^7.1.3",
     "react-scripts": "5.0.1",
     "router": "^1.3.8",
-    "proxy": "https://precenca-digital-back-end.onrender.com",
-    "socket.io-client": "^4.7.2",
     "styled-components": "^6.1.14",
     "web-vitals": "^4.2.4"
   },
@@ -44,6 +40,11 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "html-webpack-plugin": "^5.6.3",
+    "source-map-loader": "^5.0.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
   }
 }
