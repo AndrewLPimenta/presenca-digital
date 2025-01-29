@@ -90,7 +90,7 @@ function Registration() {
                             value={nome}
                             onChange={(e) => setNome(e.target.value)}
                         />
-                        <label>Nome Completo</label>
+                        <label>Nome & Sobrenome</label>
                     </div>
 
                     <div className="form-group">
@@ -101,7 +101,7 @@ function Registration() {
                             value={matricula}
                             onChange={(e) => setMatricula(e.target.value)}
                         />
-                        <label>Matrícula (9 caracteres)</label>
+                        <label>Matrícula</label>
                     </div>
 
                     <button type="submit">Registrar</button>
