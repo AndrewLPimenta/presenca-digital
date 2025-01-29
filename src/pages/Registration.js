@@ -13,7 +13,7 @@ function Registration() {
     // Função para carregar os alunos
     const loadAlunos = async () => {
         try {
-            const response = await fetch('https://precenca-digital-back-end-2998-6juewadp3.vercel.app/api/alunos');
+            const response = await fetch('https://precenca-digital-back-end-ixgy.vercel.app/api/alunos');
             const data = await response.json();
             setAlunos(data); // Atualiza o estado com a lista de alunos
         } catch (error) {
@@ -41,7 +41,7 @@ function Registration() {
         const aluno = { nome, matricula };
 
         try {
-            const response = await fetch('https://precenca-digital-back-end-2998-6juewadp3.vercel.app/api/register', {
+            const response = await fetch('https://precenca-digital-back-end-ixgy.vercel.app/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
