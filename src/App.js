@@ -9,6 +9,7 @@ function App() {
     <BrowserRouter> {/* Usando BrowserRouter para navegação */}
       <Routes> {/* Definindo as rotas */}
         <Route path="/" element={<HomePage />} /> {/* Página inicial */}
+        <Route path="/HomePage" element={<HomePage />} /> {/* Página inicial */}
         <Route path="/Present" element={<Present />} /> {/* Página de presença */}
         <Route path="/Registration" element={<Registration />} /> {/* Página de registro */}
       </Routes>
