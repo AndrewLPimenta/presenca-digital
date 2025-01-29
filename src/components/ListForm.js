@@ -16,7 +16,7 @@ const ListForm = () => {
   // Função para buscar alunos API
   const buscarAlunos = async () => {
     try {
-      const response = await axios.get('https://precenca-digital-back-end-2998.vercel.app/api/alunos');
+      const response = await axios.get('https://precenca-digital-back-end-2998-6juewadp3.vercel.app/api/alunos');
       setAlunos(response.data);
     } catch (error) {
       console.error('Erro ao buscar alunos:', error);
@@ -52,7 +52,7 @@ const ListForm = () => {
     }
 
     try {
-      const response = await axios.post('https://precenca-digital-back-end-2998.vercel.app/api/register', {
+      const response = await axios.post('https://precenca-digital-back-end-2998-6juewadp3.vercel.app/api/register', {
         matricula: qrCode || matricula,
         nome,
       });
