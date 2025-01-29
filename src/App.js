@@ -8,8 +8,7 @@ function App() {
   return (
     <Router> {/* Envolvendo o conteúdo com Router para habilitar a navegação */}
       <Routes> {/* Usando Routes ao invés de Switch (para React Router v6+) */}
-      <Route path="/" element={<Present />} /> {/* Página inicial */}
-        <Route path="/Homepage" element={<HomePage />} /> {/* Página inicial */}
+      <Route path="/HomePage" element={<HomePage />} /> {/* Página inicial */}
         <Route path="/Present" element={<Present />} /> {/* Página de presença */}
         <Route path="/Registration" element={<Registration />} /> {/* Página de registro */}
       </Routes>
